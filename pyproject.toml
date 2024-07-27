@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "news_sentiment_pipeline"
+version = "0.1.0"
+description = "A project for scraping news headlines, performing sentiment analysis, and visualizing the results."
+authors = ["Kristina Neupane <kristinaneupane9@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+beautifulsoup4 = "^4.10.0"
+scrapy = "^2.5.0"
+pandas = "^1.3.3"
+textblob = "^0.15.3"
+vaderSentiment = "^3.3.2"
+jupyter = "^1.0.0"
+matplotlib = "^3.4.3"
+seaborn = "^0.11.2"
+requests = "^2.26.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
