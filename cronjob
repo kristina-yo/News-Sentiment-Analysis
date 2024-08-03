@@ -1,0 +1,6 @@
+# cronjob
+SHELL=/bin/sh
+PATH=/usr/local/bin:/usr/bin:/bin
+
+# Run the script every day at midnight
+0 0 * * * cd /app && poetry run python main.py >> /var/log/cron.log 2>&1
