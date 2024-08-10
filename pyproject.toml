@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "news_sentiment_pipeline"
+name = "news_sentiment_analysis"
 version = "0.1.0"
 description = "A project for scraping news headlines, performing sentiment analysis, and visualizing the results."
 authors = ["Kristina Neupane <kristinaneupane9@gmail.com>"]
@@ -15,6 +15,8 @@ jupyter = "^1.0.0"
 matplotlib = "^3.4.3"
 seaborn = "^0.11.2"
 requests = "^2.26.0"
+pyspark = "^3.1.2"             
+debugpy = "^1.8.5"
 
 [build-system]
 requires = ["poetry-core"]

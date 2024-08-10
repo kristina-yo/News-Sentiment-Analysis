@@ -9,6 +9,13 @@ from app.config.settings import NEWS_SOURCES, OUTPUT_DIR_RAW
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+TIMESTAMP_FILE =  os.path.join(OUTPUT_DIR_RAW, 'scraping_timestamp.txt')
+
+
+def update_timestamp():
+    with open(TIMESTAMP_FILE, 'w') as f:
+        f.write(datetime.now().isoformat())
+
 
 # Function to fetch HTML content from a given URL
 def fetch_html(url):
@@ -104,4 +111,5 @@ def scrape_headlines():
         headlines = scrape_source(source, config)
         all_headlines.extend(headlines)
     save_headlines(all_headlines)
-
+    update_timestamp()
+    logging.info("Scraping completed and timestamp updated.")
