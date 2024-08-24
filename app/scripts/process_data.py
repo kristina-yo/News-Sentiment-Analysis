@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import pandas as pd
 from datetime import datetime
@@ -17,6 +18,13 @@ def is_scraping_completed():
     now = datetime.now()
     return (now - scraping_time).total_seconds() < 24 * 3600
 
+def preprocess_text(text):
+    # Remove all special characters except spaces
+    text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
+    # Remove extra whitespace
+    text = ' '.join(text.split())
+    return text
+
 def load_processed_files(log_path):
     if os.path.exists(log_path):
         with open(log_path, 'r') as f:
@@ -34,6 +42,11 @@ def process_file(input_path, output_path):
         data = json.load(f)
     df = pd.DataFrame(data)
     df = df.drop_duplicates(subset=['title', 'description'])
+    
+    df['title'] = df['title'].apply(preprocess_text)
+    df['description'] = df['description'].apply(preprocess_text)
+    
+    df.rename(columns={'title': 'Title', 'description': 'Description', 'source': 'Source', 'fetched_date': 'Fetched Date'}, inplace=True)
     logger.info('Transformation completed')
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df.to_csv(output_path, index=False)
