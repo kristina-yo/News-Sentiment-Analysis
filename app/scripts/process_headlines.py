@@ -3,11 +3,9 @@ import re
 import json
 import pandas as pd
 from datetime import datetime
-from app.config.settings import OUTPUT_DIR_RAW, OUTPUT_DIR_PROCESSED
+from app.config.settings import OUTPUT_DIR_RAW, OUTPUT_DIR_PROCESSED, TIMESTAMP_FILE, PROCESSED_FILES_LOG
 from app.config.logger import logger
 
-TIMESTAMP_FILE = os.path.join(OUTPUT_DIR_RAW, 'scraping_timestamp.txt')
-PROCESSED_FILES_LOG = os.path.join(OUTPUT_DIR_PROCESSED, 'processed_files.log')
 
 def is_scraping_completed():
     if not os.path.exists(TIMESTAMP_FILE):

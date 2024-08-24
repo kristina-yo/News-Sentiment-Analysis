@@ -1,15 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
+from app.config.logger import logger
 import os
 import json
-import logging
 from datetime import datetime
-from app.config.settings import NEWS_SOURCES, OUTPUT_DIR_RAW
-
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-TIMESTAMP_FILE =  os.path.join(OUTPUT_DIR_RAW, 'scraping_timestamp.txt')
+from app.config.settings import NEWS_SOURCES, OUTPUT_DIR_RAW, TIMESTAMP_FILE
 
 
 def update_timestamp():
@@ -24,7 +19,7 @@ def fetch_html(url):
         response.raise_for_status()
         return response.text
     except requests.RequestException as e:
-        logging.error(f"Error fetching URL {url}: {e}")
+        logger.error(f"Error fetching URL {url}: {e}")
         return None
 
 
@@ -85,7 +80,7 @@ def scrape_source(source, config):
 # Function to save scraped headlines to JSON files
 def save_headlines(headlines):
     if not headlines:
-        logging.info("No headlines to save.")
+        logger.info("No headlines to save.")
         return
 
     # Create directory structure based on fetched date
@@ -98,18 +93,18 @@ def save_headlines(headlines):
     try:
         with open(output_path, 'w') as f:
             json.dump(headlines, f, indent=4)            
-        logging.info(f"Headlines saved to {output_path}")
+        logger.info(f"Headlines saved to {output_path}")
     except IOError as e:
-        logging.error(f"Error saving headlines: {e}")
+        logger.error(f"Error saving headlines: {e}")
 
 
 # Main function to scrape headlines from all sources and save them to JSON files
 def scrape_headlines():
     all_headlines = []
     for source, config in NEWS_SOURCES.items():
-        logging.info(f"Scraping headlines from {source}")
+        logger.info(f"Scraping headlines from {source}")
         headlines = scrape_source(source, config)
         all_headlines.extend(headlines)
     save_headlines(all_headlines)
     update_timestamp()
-    logging.info("Scraping completed and timestamp updated.")
+    logger.info("Scraping completed and timestamp updated.")
