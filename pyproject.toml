@@ -1,8 +1,9 @@
 [tool.poetry]
-name = "news_sentiment_analysis"
+name = "news-sentiment-analysis"
 version = "0.1.0"
 description = "A project for scraping news headlines, performing sentiment analysis, and visualizing the results."
 authors = ["Kristina Neupane <kristinaneupane9@gmail.com>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.9"  # Updated to Python 3.9
@@ -14,9 +15,6 @@ pandas = "^1.5.3"  # Update to the latest version compatible with Python 3.9
 keras = "^3.5.0"
 tf-keras = "^2.17.0"
 nltk = "^3.9.1"
-jupyter = "^1.0.0"  # Keep the same
-matplotlib = "^3.7.1"  # Update to the latest version compatible with Python 3.9
-seaborn = "^0.12.2"  # Update to the latest version compatible with Python 3.9
 requests = "^2.31.0"  # Update to the latest version compatible with Python 3.9
 debugpy = "^1.6.0"  # Update to the latest version compatible with Python 3.9
 
