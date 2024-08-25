@@ -3,7 +3,7 @@ name: Run ETL Process
 on:
   schedule:
     # This cron expression runs at 6:15 PM UTC, which corresponds to midnight Kathmandu Time
-    - cron: "30 6 * * *"
+    - cron: "10 7 * * *"
 
   # Allows manual trigger
   workflow_dispatch:
