@@ -7,6 +7,7 @@ import nltk
 nltk.download('stopwords')
 nltk.download('punkt_tab')
 nltk.download('wordnet')
+nltk.download('vader_lexicon')
 
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.corpus import stopwords
