@@ -1,8 +1,11 @@
+"""
+Transform the raw headlines for better analysis.
+"""
 import os
 import re
 import json
-import pandas as pd
 from datetime import datetime
+import pandas as pd
 from app.config.settings import OUTPUT_DIR_RAW, OUTPUT_DIR_PROCESSED, TIMESTAMP_FILE, PROCESSED_FILES_LOG
 from app.config.logger import logger
 
@@ -50,7 +53,7 @@ def process_file(input_path, output_path):
     df.to_csv(output_path, index=False)
 
 def process_directory(raw_dir, processed_dir, processed_files):
-    for root, dirs, files in os.walk(raw_dir):
+    for root, _, files in os.walk(raw_dir):
         for file in files:
             if file.endswith(".json"):
                 input_path = os.path.join(root, file)

@@ -58,7 +58,7 @@ def process_sentiment_analysis(input_csv, output_csv):
     df['Combined Text'] = df['Combined Text'].apply(preprocess_text)
 
     # Apply sentiment analysis
-    df['Sentiment'], df['Score'] = zip(*df['Combined Text'].apply(analyze_sentiment))
+    df['Score'], df['Sentiment'] = zip(*df['Combined Text'].apply(analyze_sentiment))
     
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
 
@@ -68,7 +68,7 @@ def process_sentiment_analysis(input_csv, output_csv):
 
 
 def process_directory(processed_dir, analyzed_dir):
-    for root, dirs, files in os.walk(processed_dir):
+    for root, _, files in os.walk(processed_dir):
         for file in files:
             if file.endswith(".csv"):
                 input_path = os.path.join(root, file)
